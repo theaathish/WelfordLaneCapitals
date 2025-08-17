@@ -2,20 +2,36 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, TrendingUp, Lock, Mail } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     rememberMe: false
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login } = useAuth();
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic
-    console.log('Login attempt:', formData);
+    setLoading(true);
+    setError('');
+
+    try {
+      await login(formData.email, formData.password);
+      router.push('/investor/dashboard');
+    } catch (error: any) {
+      setError(error.message || 'Failed to login');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,12 +144,20 @@ const LoginPage: React.FC = () => {
               </Link>
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            )}
+
             {/* Sign In Button */}
             <button
               type="submit"
-              className="w-full bg-gold hover:bg-gold/90 text-navy-dark font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+              disabled={loading}
+              className="w-full bg-gold hover:bg-gold/90 disabled:opacity-50 disabled:cursor-not-allowed text-navy-dark font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
             >
-              Sign In
+              {loading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 

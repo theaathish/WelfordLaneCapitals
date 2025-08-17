@@ -192,7 +192,6 @@ Our strength lies in applying ICT methodologies with strict discipline, innovati
                   <p className="text-gold font-medium mb-2">{member.role}</p>
                   <div className="space-y-1 text-sm text-gray-600">
                     <p><span className="font-medium">Experience:</span> {member.experience}</p>
-                    <p><span className="font-medium">Education:</span> {member.education}</p>
                     <p><span className="font-medium">Specialty:</span> {member.specialization}</p>
                   </div>
                 </div>

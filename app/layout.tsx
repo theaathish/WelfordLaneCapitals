@@ -1,8 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export const metadata: Metadata = {
-  title: 'Meridian Capital - Premier Hedge Fund',
+  title: 'Welford Lane Capitals',
   description: 'Elite investment management with proven track record in alternative investments and institutional portfolio management.',
 };
 
@@ -13,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-lato bg-gray-50 text-navy-dark">{children}</body>
+      <body className="font-lato bg-gray-50 text-navy-dark">
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }

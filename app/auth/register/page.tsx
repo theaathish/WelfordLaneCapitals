@@ -2,11 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, TrendingUp, Lock, Mail, User, Phone, Building } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const RegisterPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,10 +24,42 @@ const RegisterPage: React.FC = () => {
     accreditedInvestor: false
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { register } = useAuth();
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle registration logic
-    console.log('Registration attempt:', formData);
+    setLoading(true);
+    setError('');
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.agreeToTerms) {
+      setError('Please agree to the terms and conditions');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await register({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        investmentAmount: formData.investmentAmount,
+        password: formData.password
+      });
+      router.push('/investor/dashboard');
+    } catch (error: any) {
+      setError(error.message || 'Failed to create account');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -285,12 +321,20 @@ const RegisterPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            )}
+
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-gold hover:bg-gold/90 text-navy-dark font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+              disabled={loading}
+              className="w-full bg-gold hover:bg-gold/90 disabled:opacity-50 disabled:cursor-not-allowed text-navy-dark font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
             >
-              Create Account
+              {loading ? 'Creating Account...' : 'Create Account'}
             </button>
           </form>
 

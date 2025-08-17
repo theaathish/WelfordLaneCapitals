@@ -1,7 +1,8 @@
 'use client';
 
-import * as React from 'react';
-import * as RechartsPrimitive from 'recharts';
+import * as React from 'rea](({ id, className, children, config, ...props }, ref) => {
+  const uniqueId = React.useId();
+  const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;import * as RechartsPrimitive from 'recharts';
 
 import { cn } from '@/lib/utils';
 
@@ -38,13 +39,14 @@ const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
     config: ChartConfig;
-    children: React.ComponentProps<
-      typeof RechartsPrimitive.ResponsiveContainer
-    >['children'];
+    children: React.ReactNode;
   }
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId();
+>(({ id, className, children, config, ...props }, ref) => {
+  const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
+  const ResponsiveContainer = RechartsPrimitive.ResponsiveContainer as unknown as React.ElementType;
 
   return (
     <ChartContext.Provider value={{ config }}>
@@ -58,15 +60,13 @@ const ChartContainer = React.forwardRef<
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
+        <ResponsiveContainer {...props}>
           {children}
-        </RechartsPrimitive.ResponsiveContainer>
+        </ResponsiveContainer>
       </div>
     </ChartContext.Provider>
   );
 });
-ChartContainer.displayName = 'Chart';
-
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
     ([_, config]) => config.theme || config.color
@@ -103,6 +103,7 @@ ${colorConfig
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
 const ChartTooltipContent = React.forwardRef<
+const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
     React.ComponentProps<'div'> & {
@@ -111,9 +112,10 @@ const ChartTooltipContent = React.forwardRef<
       indicator?: 'line' | 'dot' | 'dashed';
       nameKey?: string;
       labelKey?: string;
+      payload?: any[];
+      label?: React.ReactNode;
     }
 >(
-  (
     {
       active,
       payload,
@@ -148,7 +150,7 @@ const ChartTooltipContent = React.forwardRef<
 
       if (labelFormatter) {
         return (
-          <div className={cn('font-medium', labelClassName)}>
+            {labelFormatter(value, payload) as React.ReactNode}
             {labelFormatter(value, payload)}
           </div>
         );
@@ -184,7 +186,7 @@ const ChartTooltipContent = React.forwardRef<
         )}
       >
         {!nestLabel ? tooltipLabel : null}
-        <div className="grid gap-1.5">
+          {(payload as any[]).map((item: any, index: number) => {
           {payload.map((item, index) => {
             const key = `${nameKey || item.name || item.dataKey || 'value'}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
@@ -284,7 +286,7 @@ const ChartLegendContent = React.forwardRef<
           verticalAlign === 'top' ? 'pb-3' : 'pt-3',
           className
         )}
-      >
+        {(payload as any[]).map((item: any) => {
         {payload.map((item) => {
           const key = `${nameKey || item.dataKey || 'value'}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
