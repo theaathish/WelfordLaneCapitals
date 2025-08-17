@@ -13,19 +13,37 @@ const ContactPage: React.FC = () => {
     investmentSize: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      investmentSize: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+    setFeedbackMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setFeedbackMessage(result.message || 'Your message has been sent successfully!');
+        setFormData({ name: '', email: '', company: '', investmentSize: '', message: '' });
+      } else {
+        setFeedbackMessage(result.error || 'Failed to send your message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      setFeedbackMessage('An unexpected error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -125,10 +143,10 @@ const ContactPage: React.FC = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-gold transition-colors"
                   >
                     <option value="">Select range</option>
-                    <option value="250k-500k">$250K - $500K</option>
-                    <option value="500k-1m">$500K - $1M</option>
-                    <option value="1m-5m">$1M - $5M</option>
-                    <option value="5m+">$5M+</option>
+                    <option value="10-50">$10-50</option>
+                    <option value="50-100">$50-100</option>
+                    <option value="100-250">$100-250</option>
+                    <option value="250+">$250+</option>
                   </select>
                 </div>
 
@@ -151,11 +169,14 @@ const ContactPage: React.FC = () => {
                 <button
                   type="submit"
                   className="w-full bg-gold hover:bg-gold/90 text-navy-dark font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+                  disabled={isSubmitting}
                 >
-                  <Send className="w-5 h-5" />
-                  <span>Send Message</span>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
+              {feedbackMessage && (
+                <p className="mt-4 text-center text-sm text-gray-700">{feedbackMessage}</p>
+              )}
             </div>
 
             {/* Contact Information */}

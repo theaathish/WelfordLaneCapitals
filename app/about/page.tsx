@@ -96,7 +96,7 @@ Our strength lies in applying ICT methodologies with strict discipline, innovati
                 delivering superior risk-adjusted returns across market cycles.
               </p>
             </div>
-            <div className="bg-gray-50 rounded-2xl p-8">
+            <div className="bg-gray-50 blur-sm  -2xl p-8">
               <h3 className="font-montserrat font-bold text-2xl text-navy-dark mb-6">By the Numbers</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">

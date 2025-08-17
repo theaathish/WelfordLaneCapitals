@@ -11,8 +11,8 @@ const ServicesPage: React.FC = () => {
     {
       title: "Low Risk Portfolio",
       risk: "Conservative",
-      minInvestment: "$250,000",
-      expectedReturn: "8-12%",
+      minInvestment: "$100",
+      expectedReturn: "2-3% /per month",
       description: "Fixed income securities, government bonds, and stable dividend-paying equities.",
       features: ["Capital preservation focused", "Quarterly distributions", "Low volatility"],
       color: "bg-green-50 border-green-200"
@@ -20,8 +20,8 @@ const ServicesPage: React.FC = () => {
     {
       title: "Balanced Growth Pool",
       risk: "Moderate",
-      minInvestment: "$500,000",
-      expectedReturn: "15-22%",
+      minInvestment: "$75",
+      expectedReturn: "4-5% /per month",
       description: "Diversified portfolio combining growth equities, REITs, and alternative investments.",
       features: ["Balanced risk-return profile", "Semi-annual reporting", "Professional management"],
       color: "bg-blue-50 border-blue-200"
@@ -29,8 +29,8 @@ const ServicesPage: React.FC = () => {
     {
       title: "High Alpha Strategy",
       risk: "Aggressive",
-      minInvestment: "$1,000,000",
-      expectedReturn: "25-40%",
+      minInvestment: "$50",
+      expectedReturn: "8% /per month",
       description: "Alternative investments, private equity, hedge strategies, and emerging markets.",
       features: ["Maximum growth potential", "Monthly performance updates", "Institutional-grade strategies"],
       color: "bg-purple-50 border-purple-200"
@@ -124,27 +124,27 @@ const ServicesPage: React.FC = () => {
                   <Calendar className="w-6 h-6 text-gold mt-1" />
                   <div>
                     <h4 className="font-semibold text-navy-dark">Launch Date</h4>
-                    <p className="text-gray-600">April 15, 2025 - Subscription period opens March 1st</p>
+                    <p className="text-gray-600">Sep 1 , 2025 - Subscription period opens Aug 15th</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <DollarSign className="w-6 h-6 text-gold mt-1" />
                   <div>
                     <h4 className="font-semibold text-navy-dark">Minimum Investment</h4>
-                    <p className="text-gray-600">$1M initial, $100K subsequent investments</p>
+                    <p className="text-gray-600">$50 initial</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <Clock className="w-6 h-6 text-gold mt-1" />
                   <div>
                     <h4 className="font-semibold text-navy-dark">Lock-up Period</h4>
-                    <p className="text-gray-600">24 months with quarterly redemption thereafter</p>
+                    <p className="text-gray-600">6 months</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-xl p-8">
+            <div className="bg-white blur-sm rounded-2xl shadow-xl p-8">
               <h3 className="font-montserrat font-bold text-2xl text-navy-dark mb-6">Upcoming Pool Performance Targets</h3>
               <div className="grid grid-cols-2 gap-4">
                 <MetricCard
@@ -185,7 +185,7 @@ const ServicesPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid blur-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <MetricCard
               title="Overall Fund Returns"
               value="34.2%"

@@ -37,30 +37,30 @@ const InvestorDashboard: React.FC = () => {
 
   // Sample portfolio data
   const portfolioData = [
-    { date: 'Jan', value: 250000 },
-    { date: 'Feb', value: 268000 },
-    { date: 'Mar', value: 285000 },
-    { date: 'Apr', value: 301000 },
-    { date: 'May', value: 295000 },
-    { date: 'Jun', value: 318000 },
-    { date: 'Jul', value: 335000 },
-    { date: 'Aug', value: 352000 },
-    { date: 'Sep', value: 348000 },
-    { date: 'Oct', value: 371000 },
-    { date: 'Nov', value: 389000 },
-    { date: 'Dec', value: 412000 },
+    { date: 'Jan', value: 0 },
+    { date: 'Feb', value: 0 },
+    { date: 'Mar', value: 0 },
+    { date: 'Apr', value: 0 },
+    { date: 'May', value: 0 },
+    { date: 'Jun', value: 0 },
+    { date: 'Jul', value: 0 },
+    { date: 'Aug', value: 0 },
+    { date: 'Sep', value: 0 },
+    { date: 'Oct', value: 0 },
+    { date: 'Nov', value: 0 },
+    { date: 'Dec', value: 0 },
   ];
 
   const recentTransactions = [
-    { date: '2024-01-15', type: 'Investment', amount: 50000, pool: 'Technology Growth Pool' },
-    { date: '2024-01-10', type: 'Distribution', amount: -12500, pool: 'Balanced Growth Pool' },
-    { date: '2024-01-05', type: 'Investment', amount: 25000, pool: 'Alternative Credit' },
+    { date: '2024-01-15', type: 'Investment', amount: 0, pool: 'Technology Growth Pool' },
+    { date: '2024-01-10', type: 'Distribution', amount: 0, pool: 'Balanced Growth Pool' },
+    { date: '2024-01-05', type: 'Investment', amount: 0, pool: 'Alternative Credit' },
   ];
 
   const holdings = [
-    { pool: 'Technology Growth Pool', allocation: 45, value: 185400, return: 28.5 },
-    { pool: 'Balanced Growth Pool', allocation: 35, value: 144200, return: 18.2 },
-    { pool: 'Alternative Credit', allocation: 20, value: 82400, return: 12.8 },
+    { pool: 'Technology Growth Pool', allocation: 0, value: 0, return: 0 },
+    { pool: 'Balanced Growth Pool', allocation: 0, value: 0, return: 0 },
+    { pool: 'Alternative Credit', allocation: 0, value: 0, return: 0 },
   ];
 
   return (
@@ -95,33 +95,33 @@ const InvestorDashboard: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <MetricCard
             title="Total Portfolio Value"
-            value="$412,000"
-            change={18.5}
+            value="$0"
+            change={0.0}
             changeType="positive"
             icon={DollarSign}
             subtitle="vs last month"
           />
           <MetricCard
             title="YTD Return"
-            value="24.8%"
-            change={3.2}
+            value="$0"
+            change={0.0}
             changeType="positive"
             icon={TrendingUp}
             subtitle="Year to date performance"
           />
           <MetricCard
             title="Monthly Gain"
-            value="$23,000"
-            change={6.3}
+            value="$0"
+            change={0.0}
             changeType="positive"
             icon={ArrowUpRight}
             subtitle="This month's growth"
           />
           <MetricCard
             title="Risk Score"
-            value="7.2/10"
-            change={-0.5}
-            changeType="negative"
+            value="1/10"
+            change={0.5}
+            changeType="positive"
             icon={Target}
             subtitle="Portfolio risk level"
           />

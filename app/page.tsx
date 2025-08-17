@@ -11,18 +11,18 @@ import Link from 'next/link';
 
 // Sample performance data
 const performanceData = [
-  { date: 'Jan', fund: 12.5, benchmark: 8.2 },
-  { date: 'Feb', fund: 15.2, benchmark: 9.1 },
-  { date: 'Mar', fund: 18.7, benchmark: 10.5 },
-  { date: 'Apr', fund: 22.1, benchmark: 11.8 },
-  { date: 'May', fund: 19.8, benchmark: 10.2 },
-  { date: 'Jun', fund: 25.3, benchmark: 12.9 },
-  { date: 'Jul', fund: 28.6, benchmark: 14.1 },
-  { date: 'Aug', fund: 31.2, benchmark: 15.6 },
-  { date: 'Sep', fund: 28.9, benchmark: 14.8 },
-  { date: 'Oct', fund: 34.5, benchmark: 16.3 },
-  { date: 'Nov', fund: 37.8, benchmark: 17.2 },
-  { date: 'Dec', fund: 41.2, benchmark: 18.9 },
+  { date: 'Jan', fund: 0.0, benchmark: 0.0 },
+  { date: 'Feb', fund: 0.0, benchmark: 0.0 },
+  { date: 'Mar', fund: 0.0, benchmark: 0.0 },
+  { date: 'Apr', fund: 0.0, benchmark: 0.0 },
+  { date: 'May', fund: 0.0, benchmark: 0.0 },
+  { date: 'Jun', fund: 0.0, benchmark: 0.0 },
+  { date: 'Jul', fund: 0.0, benchmark: 0.0 },
+  { date: 'Aug', fund: 0.0, benchmark: 0.0 },
+  { date: 'Sep', fund: 0.0, benchmark: 0.0 },
+  { date: 'Oct', fund: 0.0, benchmark: 0.0 },
+  { date: 'Nov', fund: 0.0, benchmark: 0.0 },
+  { date: 'Dec', fund: 0.0, benchmark: 0.0 },
 ];
 
 const HomePage: React.FC = () => {
@@ -92,7 +92,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Key Metrics */}
-      <section className="py-16 bg-white">
+      <section className="py-16 blur-sm bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <MetricCard
@@ -154,7 +154,7 @@ const HomePage: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-2xl shadow-xl p-8">
+            <div className="bg-white blur-sm rounded-2xl shadow-xl p-8">
               <h3 className="font-montserrat font-bold text-2xl text-navy-dark mb-6">Top Performing Assets</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
