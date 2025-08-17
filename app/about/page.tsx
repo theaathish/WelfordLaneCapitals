@@ -5,6 +5,8 @@ import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import { Award, Users, TrendingUp, Shield, Globe, Target } from 'lucide-react';
 
+// Note: metadata export removed for client component - SEO handled at layout level
+
 const AboutPage: React.FC = () => {
   const teamMembers = [
     {

@@ -5,6 +5,7 @@ import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PerformanceChart from '@/components/ui/PerformanceChart';
 import MetricCard from '@/components/ui/MetricCard';
+import SEOFAQSection from '@/components/SEOFAQSection';
 import { TrendingUp, DollarSign, Users, Target, ArrowRight, AlertCircle, Shield, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -28,6 +29,13 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation userType="public" />
+
+      {/* Hidden SEO Content for Search Engines */}
+      <div className="sr-only">
+        <h1>Elite Alternative Investment Management</h1>
+        <p>Welford Lane Capitals is a premier private investment firm delivering institutional-grade performance through diversified investment pools. Our top-performing assets include Technology Growth (+42.8% YTD), Alternative Credit (+18.5% YTD), and Real Estate Alpha (+26.3% YTD). Starting at just a $50 minimum investment, sophisticated investors can join our trusted community and benefit from consistent alpha generation.</p>
+        <p>Keywords: elite investment performance, alternative investment strategies, institutional portfolio management, top performing assets, fund performance vs S&P 500, technology growth pool, alternative credit, real estate alpha, minimum investment $50, institutional investor hedge fund, alpha generator, high growth tech equities, private credit strategies, commercial real estate investments, performance reports, investor portal, investment pools, compliance risk disclosure, premier hedge fund</p>
+      </div>
 
       {/* Maintenance Banner - Hidden by default */}
       <div className="bg-orange-50 border-b border-orange-200 px-4 py-3 hidden">
@@ -211,6 +219,9 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Hidden SEO FAQ Section */}
+      <SEOFAQSection />
 
       <Footer />
     </div>
